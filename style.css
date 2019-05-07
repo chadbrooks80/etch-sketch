@@ -1,0 +1,22 @@
+*,
+body {
+  box-sizing: border-box;
+}
+
+div#sketch-container {
+  box-sizing: content-box;
+  width: 500px;
+  height: 500px;
+  margin: 0 auto;
+  margin-top: 100px;
+  border: solid 2px black;
+}
+
+.single-grid {
+  /* width: 50px; */
+  /* height: 50px; */
+  /* border: solid black 1px; */
+  /* display: inline-block; */
+  float: left;
+  500 / x = squares
+}

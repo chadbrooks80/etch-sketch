@@ -1,0 +1,51 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="sketch-container"></div>
+    <script>
+      const sketchContainer = document.querySelector("div#sketch-container");
+      console.log(sketchContainer);
+
+      // create a function that places in the squares
+      let createGrid = numberSquares => {
+        // convert to Number
+        numberSquares = +numberSquares;
+
+        for (i = 0; i < numberSquares; i++) {
+          let newGrid = document.createElement("div");
+          newGrid.className = "single-grid";
+          let heightWidth = (500 ** 2 / numberSquares) ** 0.5;
+          console.log(heightWidth);
+          newGrid.style.height = `${heightWidth}`;
+          newGrid.style.width = `${heightWidth}`;
+          sketchContainer.appendChild(newGrid);
+        }
+      };
+      createGrid(4 * 9 * 9 * 4);
+
+      let mouseDown = 0;
+      document.body.onmousedown = function() {
+        ++mouseDown;
+      };
+      document.body.onmouseup = function() {
+        --mouseDown;
+      };
+
+      let singleGrids = Array.from(document.querySelectorAll(".single-grid"));
+
+      singleGrids.forEach(function(grid) {
+        grid.addEventListener("mouseover", function(e) {
+          if (mouseDown) {
+            this.style.backgroundColor = "purple";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
