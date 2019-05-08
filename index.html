@@ -12,6 +12,19 @@
       const sketchContainer = document.querySelector("div#sketch-container");
       console.log(sketchContainer);
 
+      // Create Function for choosing random colors
+      let randomColor = () => {
+        const hexChoices =["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"];
+        let randomColorChoice = "#";
+
+        for (let i=0; i < 6; i++) {
+          randomColorChoice += hexChoices[Math.floor(Math.random()*hexChoices.length)]
+          
+        }
+        return randomColorChoice
+      }
+
+
       // create a function that places in the squares
       let createGrid = numberSquares => {
         // convert to Number
@@ -42,7 +55,7 @@
       singleGrids.forEach(function(grid) {
         grid.addEventListener("mouseover", function(e) {
           if (mouseDown) {
-            this.style.backgroundColor = "purple";
+            this.style.backgroundColor = randomColor();
           }
         });
       });
