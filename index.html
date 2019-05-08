@@ -7,23 +7,54 @@
     <title>Document</title>
   </head>
   <body>
+    <div id="colorpickerHolder">
+      <div style="background-color: #0000ff;"></div>
+    </div>
     <div id="sketch-container"></div>
+    <!-- Jquery -->
+    <script type="text/javascript" src="js/jquery.js"></script>
+
+    <!-- color picker -->
+    <link
+      rel="stylesheet"
+      media="screen"
+      type="text/css"
+      href="css/colorpicker.css"
+    />
+    <script type="text/javascript" src="js/colorpicker.js"></script>
+
     <script>
       const sketchContainer = document.querySelector("div#sketch-container");
       console.log(sketchContainer);
 
       // Create Function for choosing random colors
       let randomColor = () => {
-        const hexChoices =["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"];
+        const hexChoices = [
+          "0",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ];
         let randomColorChoice = "#";
 
-        for (let i=0; i < 6; i++) {
-          randomColorChoice += hexChoices[Math.floor(Math.random()*hexChoices.length)]
-          
+        for (let i = 0; i < 6; i++) {
+          randomColorChoice +=
+            hexChoices[Math.floor(Math.random() * hexChoices.length)];
         }
-        return randomColorChoice
-      }
-
+        return randomColorChoice;
+      };
 
       // create a function that places in the squares
       let createGrid = numberSquares => {
@@ -56,6 +87,32 @@
         grid.addEventListener("mouseover", function(e) {
           if (mouseDown) {
             this.style.backgroundColor = randomColor();
+          }
+        });
+      });
+    </script>
+    <script>
+      $(function() {
+        $("#colorpickerHolder").ColorPicker({
+          flat: true,
+
+          onChange: function(color) {
+            console.log(color.b);
+          }
+        });
+
+        $("colorSelector").ColorPicker({
+          color: "#0000ff",
+          onShow: function(colpk) {
+            $colpk.fadeIn(500);
+            return false;
+          },
+          onHide: function(colpk) {
+            $(colpk).fadeOut(500);
+            return false;
+          },
+          conChange: function(hsb, hex, rgb) {
+            $("colorSelector div").css("backgroundColor", "#" + hex);
           }
         });
       });
